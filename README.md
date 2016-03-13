@@ -1,6 +1,6 @@
 # Pasteur
 
-[![docs-badge][]][docs] [[![license-badge][]][license] [![travis-badge][]][travis] [![coverage-badge][]][coverage] [![gitter-badge][]][gitter]
+[![docs-badge][]][docs] [![license-badge][]][license] [![travis-badge][]][travis] [![coverage-badge][]][coverage] [![gitter-badge][]][gitter]
 
 [license-badge]: https://img.shields.io/crates/l/cublas.svg?style=flat-square
 [license]: https://github.com/adjivas/pasteur/blob/master/README.md#license

@@ -16,6 +16,10 @@ doc = false
 [features]
 unstable = [] # for travis-cargo
 
+[dependencies.clap]
+version = "*"
+features = [ "suggestions", "color" ]
+
 [dependencies.rustc-serialize]
 version = "*"
 

@@ -1,0 +1,55 @@
+# This file describe the command line interface options
+name: Pasteur
+version: 0.1
+about: A WebSite who synthesize all the knowledge about the autism
+author: adjivas <adjivas@users.noreply.github.com>
+
+args:
+    - template:
+        help: Defines the template's directory.
+        short: t
+        long: source-template
+        takes_value: true
+    - locale:
+        help: Defines the locale's directory.
+        short: l
+        long: source-locale
+        takes_value: true
+    - protocole:
+        help: Defines the protocole.
+        short: p
+        long: protocole
+        takes_value: true
+    - address:
+        help: Defines the ip's address.
+        short: a
+        long: address
+        takes_value: true
+    - socket:
+        help: Defines the port.
+        short: s
+        long: socket
+        takes_value: true
+    - key:
+        help: Defines the key.pem's certificat.
+        short: k
+        long: ca-key
+        takes_value: true
+    - cert:
+        help: Defines the cert.pem's certificat.
+        short: c
+        long: ca-cert
+        takes_value: true
+
+subcommands:
+    - test:
+        about: controls testing features
+        version: 1.3
+        author: adjivas <adjivas@users.noreply.github.com>
+        args:
+            - debug:
+                short: d
+                help: print debug information
+            - verbose:
+                short: v
+                help: print test information verbosely

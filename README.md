@@ -1,6 +1,6 @@
 # Pasteur
 
-[![docs-badge][]][docs] [![license-badge][]][license] [![travis-badge][]][travis] [![coverage-badge][]][coverage] [![gitter-badge][]][gitter]
+[![travis-badge][]][travis] [![coverage-badge][]][coverage] [![docs-badge][]][docs] [![license-badge][]][license] [![gitter-badge][]][gitter]
 
 [license-badge]: https://img.shields.io/crates/l/cublas.svg?style=flat-square
 [license]: https://github.com/adjivas/pasteur/blob/master/README.md#license
@@ -28,7 +28,7 @@
 ```
 
 #### License:
-*pasteur*'s code in this repo is licensed under either of:
+**pasteur**'s code in this repo is licensed under either of:
 
 uses the [APACHE][license-mit] and [MIT][license-apache] license.
  * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)

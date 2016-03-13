@@ -50,7 +50,6 @@ after_success:
 
 env:
   global:
-    - TRAVIS_CARGO_NIGHTLY_FEATURE=nightly
     - ARCH=x86_64
     - ARCH=i686
   matrix:

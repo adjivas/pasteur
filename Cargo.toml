@@ -14,5 +14,4 @@ name = "pasteur"
 doc = false
 
 [features]
-dev = []
-unstable = []
+unstable = [] # for travis-cargo

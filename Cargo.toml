@@ -15,3 +15,18 @@ doc = false
 
 [features]
 unstable = [] # for travis-cargo
+
+[dependencies.rustc-serialize]
+version = "*"
+
+[dependencies.handlebars-iron]
+version = "*"
+
+[dependencies.handlebars]
+version = "*"
+
+[dependencies.router]
+version = "*"
+
+[dependencies.iron]
+version = "*"

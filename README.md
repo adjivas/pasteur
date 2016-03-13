@@ -21,6 +21,7 @@
 |__ LICENSE-MIT
 |__ README.md
 |__ CHANGELOG.md
+|__ templates/*
 \__ src
     |__ lib.rs
     \__ main.rs

@@ -17,7 +17,13 @@ rust:
 
 matrix:
   allow_failures:
+    - rust: nightly
+      env: FEATURES=lint
+  exclude:
     - rust: beta
+      env: FEATURES=lint
+    - rust: stable
+      env: FEATURES=lint
 
 os:
   - linux
@@ -25,11 +31,6 @@ os:
 branches:
   only:
     - master
-
-env:
-  - TRAVIS_CARGO_NIGHTLY_FEATURE=nightly
-  - ARCH=x86_64
-  - ARCH=i686
 
 before_script:
   - |
@@ -46,3 +47,12 @@ script:
 after_success:
   - travis-cargo --only stable doc-upload
   - travis-cargo coveralls --no-sudo --verify
+
+env:
+  global:
+    - TRAVIS_CARGO_NIGHTLY_FEATURE=nightly
+    - ARCH=x86_64
+    - ARCH=i686
+  matrix:
+    - FEATURES=travis
+    - FEATURES=lint

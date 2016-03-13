@@ -1,10 +1,10 @@
 {
   "name": "Pasteur",
-  "description": "A WebSite who synthesize all the knowledge about the autism"
+  "description": "A WebSite who synthesize all the knowledge about the autism",
   "repository": "https://github.com/adjivas/pasteur.git",
   "success_url": "/",
   "keywords": ["rust", "iron", "autism", "reference"],
-  "website": "https://github.com/adjivas/pasteur"
+  "website": "https://github.com/adjivas/pasteur",
   "env": {
     "BUILDPACK_URL": "https://github.com/emk/heroku-buildpack-rust.git"
   }

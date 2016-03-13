@@ -8,7 +8,7 @@
 [docs]: http://adjivas.github.io/pasteur/pasteur
 [gitter-badge]: https://badges.gitter.im/adjivas/pasteur.svg?style=flat-square
 [gitter]: https://gitter.im/adjivas/pasteur?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
-[travis-badge]: https://travis-ci.org/adjivas/pasteur.svg?branch=master?style=flat-square
+[travis-badge]: https://travis-ci.org/adjivas/pasteur.svg?branch=master&style=flat-square
 [travis]: https://travis-ci.org/adjivas/pasteur
 [coverage-badge]: https://coveralls.io/repos/github/adjivas/pasteur/badge.svg?branch=master&style=flat-square
 [coverage]: https://coveralls.io/github/adjivas/pasteur?branch=master

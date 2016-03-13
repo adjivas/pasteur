@@ -12,3 +12,6 @@ license = "MIT OR Apache-2.0"
 [[bin]]
 name = "pasteur"
 doc = false
+
+[features]
+unstable = []

@@ -14,9 +14,9 @@ extern crate iron;
 pub fn index (
     _: &mut iron::request::Request,
 ) -> iron::IronResult<iron::response::Response> {
+    use iron::modifier::Set;
     let mut resp: iron::response::Response = iron::response::Response::new();
 
-    use iron::Set;
     resp.set_mut(handlebars_iron::Template::new("index", ())).set_mut(iron::status::Ok);
     Ok(resp)
 }

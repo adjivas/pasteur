@@ -1,3 +1,4 @@
 format_strings = false
 reorder_imports = true
+normalise_comments = false
 max_width = 70

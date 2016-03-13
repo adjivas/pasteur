@@ -1,0 +1,6 @@
+[clog]
+repository = "https://github.com/adjivas/pasteur"
+link-style = "github"
+changelog = "CHANGELOG.md"
+output-format = "markdown"
+from-latest-tag = true

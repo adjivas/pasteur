@@ -1,0 +1,14 @@
+[package]
+name = "pasteur"
+version = "0.0.1"
+authors = ["adjivas <adjivas@users.noreply.github.com>"]
+description = "WebSite who synthesize all the knowledge about the autism"
+documentation = "http://adjivas.github.io/pasteur/pasteur"
+repository = "https://github.com/adjivas/pasteur.git"
+readme = "README.md"
+keywords = ["autism", "reference"]
+license = "MIT OR Apache-2.0"
+
+[[bin]]
+name = "pasteur"
+doc = false

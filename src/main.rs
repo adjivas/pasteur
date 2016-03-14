@@ -5,8 +5,34 @@
 // This file may not be copied, modified, or distributed
 // except according to those terms.
 
+#[macro_use]
+extern crate clap;
 extern crate pasteur;
 
-fn main () {
-    pasteur::new();
+const DEFAULT_TEMPLATE: &'static str = "templates";
+const DEFAULT_LOCALE: &'static str = "locales";
+const DEFAULT_PROTOCOL: &'static str = "http";
+const DEFAULT_ADDRESS: &'static str = "localhost";
+const DEFAULT_SOCKET: &'static str = "3000";
+const DEFAULT_KEY: &'static str = "ca/key.pem";
+const DEFAULT_CERT: &'static str = "ca/cert.pem";
+
+/// The `main` function parses the arguments and
+/// instantiates the (http | https) server.
+
+pub fn main () {
+    let yaml = load_yaml!("cli.yml");
+    let options = clap::App::from_yaml(yaml).get_matches();
+
+    pasteur::new (
+        options.value_of("template").unwrap_or(DEFAULT_TEMPLATE),
+        options.value_of("locale").unwrap_or(DEFAULT_LOCALE),
+        options.value_of("key").unwrap_or(DEFAULT_KEY),
+        options.value_of("cert").unwrap_or(DEFAULT_CERT),
+        options.value_of("protocol").unwrap_or(DEFAULT_PROTOCOL),
+        &format!("{}:{}",
+            options.value_of("address").unwrap_or(DEFAULT_ADDRESS),
+            options.value_of("socket").unwrap_or(DEFAULT_SOCKET)
+        ),
+    );
 }

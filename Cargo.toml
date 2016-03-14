@@ -18,7 +18,10 @@ unstable = [] # for travis-cargo
 
 [dependencies.clap]
 version = "*"
-features = [ "suggestions", "color" ]
+features = ["yaml", "suggestions", "color"]
+
+[dependencies]
+version = "*"
 
 [dependencies.rustc-serialize]
 version = "*"

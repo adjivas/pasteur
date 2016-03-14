@@ -21,12 +21,22 @@ pub fn index (
     Ok(resp)
 }
 
-pub fn new () {
+/// The `new` function instantiates the server.
+
+#[warn(unused_variables)]
+pub fn new (
+    template: &str,
+    locale: &str,
+    key: &str,
+    cert: &str,
+    protocol: &str,
+    address: &str,
+) {
     let mut hbse = handlebars_iron::HandlebarsEngine::new2();
 
     hbse.add(std::boxed::Box::new (
         handlebars_iron::DirectorySource::new (
-            "templates", ".hbs"
+            template, ".hbs"
         )
     ));
     if let std::result::Result::Err(why) = hbse.reload() {
@@ -42,6 +52,7 @@ pub fn new () {
 
     chain.link_after(hbse);
 
-    println!("Server running at http://localhost:3000/");
-    iron::Iron::new(chain).http("localhost:3000").unwrap();
+    println!("Server running at {}://{}/", protocol, address);
+
+    iron::Iron::new(chain).http(address).unwrap();
 }

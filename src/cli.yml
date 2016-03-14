@@ -15,11 +15,14 @@ args:
         short: l
         long: source-locale
         takes_value: true
-    - protocole:
-        help: Defines the protocole.
+    - protocol:
+        help: Defines the protocol.
         short: p
-        long: protocole
+        long: protocol
         takes_value: true
+        possible_values:
+          - http
+          - https
     - address:
         help: Defines the ip's address.
         short: a

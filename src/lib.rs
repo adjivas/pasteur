@@ -23,7 +23,6 @@ pub fn index (
 
 /// The `new` function instantiates the server.
 
-#[warn(unused_variables)]
 pub fn new (
     template: &str,
     locale: &str,

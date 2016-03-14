@@ -16,12 +16,12 @@ doc = false
 [features]
 unstable = [] # for travis-cargo
 
+[dependencies.walkdir]
+version = "*"
+
 [dependencies.clap]
 version = "*"
 features = ["yaml", "suggestions", "color"]
-
-[dependencies]
-version = "*"
 
 [dependencies.rustc-serialize]
 version = "*"
@@ -36,4 +36,7 @@ version = "*"
 version = "*"
 
 [dependencies.iron]
+version = "*"
+
+[dependencies.l20n]
 version = "*"

@@ -14,7 +14,7 @@
 [coverage]: https://coveralls.io/github/adjivas/pasteur?branch=master
 
 #### Directory-Tree:
-```shell
+```
 .
 |__ Cargo.toml
 |__ LICENSE-APACHE
@@ -29,7 +29,7 @@
 
 #### CLI:
 See command **help**:
-```shell
+```
 Pasteur
 adjivas <adjivas@users.noreply.github.com>
 A WebSite who synthesize all the knowledge about the autism
@@ -66,3 +66,8 @@ uses the [APACHE][license-mit] and [MIT][license-apache] license.
 [license-mit]: https://github.com/adjivas/pasteur/blob/master/LICENSE-MIT
 
 at your option.
+
+
+#### Contribution:
+
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions.

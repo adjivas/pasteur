@@ -15,13 +15,12 @@ pub mod protocol;
 mod middleware;
 
 use std::error::Error;
+use iron::modifier::Set;
 
 pub fn index (
     req: &mut iron::request::Request,
 ) -> iron::IronResult<iron::response::Response> {
     let conn = req.extensions.get::<middleware::ShareLang>().unwrap();
-
-    use iron::modifier::Set;
     let mut resp: iron::response::Response = iron::response::Response::new();
 
     resp.set_mut(handlebars_iron::Template::new("index", ())).set_mut(iron::status::Ok);

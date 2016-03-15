@@ -9,13 +9,15 @@
 extern crate clap;
 extern crate pasteur;
 
+/// Default* const arguments defined by CLI.
+
 const DEFAULT_TEMPLATE: &'static str = "templates";
 const DEFAULT_LOCALE: &'static str = "locales";
+const DEFAULT_CERT: &'static str = "ca/cert.pem";
+const DEFAULT_KEY: &'static str = "ca/key.pem";
 const DEFAULT_PROTOCOL: &'static str = "http";
 const DEFAULT_ADDRESS: &'static str = "localhost";
 const DEFAULT_SOCKET: &'static str = "3000";
-const DEFAULT_KEY: &'static str = "ca/key.pem";
-const DEFAULT_CERT: &'static str = "ca/cert.pem";
 
 /// The `main` function parses the arguments and
 /// instantiates the (http | https) server.
@@ -27,9 +29,11 @@ pub fn main () {
     pasteur::new (
         options.value_of("template").unwrap_or(DEFAULT_TEMPLATE),
         options.value_of("locale").unwrap_or(DEFAULT_LOCALE),
-        options.value_of("key").unwrap_or(DEFAULT_KEY),
         options.value_of("cert").unwrap_or(DEFAULT_CERT),
-        options.value_of("protocol").unwrap_or(DEFAULT_PROTOCOL),
+        options.value_of("key").unwrap_or(DEFAULT_KEY),
+        pasteur::protocol::Protocol::from_str (
+            options.value_of("protocol").unwrap_or(DEFAULT_PROTOCOL)
+        ).unwrap(),
         &format!("{}:{}",
             options.value_of("address").unwrap_or(DEFAULT_ADDRESS),
             options.value_of("socket").unwrap_or(DEFAULT_SOCKET)

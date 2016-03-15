@@ -11,6 +11,11 @@ extern crate handlebars;
 extern crate router;
 extern crate iron;
 
+pub mod protocol;
+mod lang;
+
+use std::error::Error;
+
 pub fn index (
     _: &mut iron::request::Request,
 ) -> iron::IronResult<iron::response::Response> {
@@ -26,12 +31,13 @@ pub fn index (
 pub fn new (
     template: &str,
     locale: &str,
-    key: &str,
     cert: &str,
-    protocol: &str,
+    key: &str,
+    protocol: protocol::Protocol,
     address: &str,
 ) {
     let mut hbse = handlebars_iron::HandlebarsEngine::new2();
+    let lang = lang::Lang::new(locale);
 
     hbse.add(std::boxed::Box::new (
         handlebars_iron::DirectorySource::new (
@@ -39,7 +45,6 @@ pub fn new (
         )
     ));
     if let std::result::Result::Err(why) = hbse.reload() {
-        use std::error::Error;
         panic!("{}", why.description());
     }
 
@@ -52,6 +57,12 @@ pub fn new (
     chain.link_after(hbse);
 
     println!("Server running at {}://{}/", protocol, address);
-
-    iron::Iron::new(chain).http(address).unwrap();
+    match protocol {
+        protocol::Protocol::HTTP => iron::Iron::new(chain).http(address),
+        protocol::Protocol::HTTPS => iron::Iron::new(chain).https (
+          address,
+          std::path::PathBuf::from(cert),
+          std::path::PathBuf::from(key)
+        ),
+    }.unwrap();
 }

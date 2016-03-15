@@ -127,7 +127,7 @@ impl Lang {
     }
 
 	/// The `parse_i20n` function returns the tuple
-    /// key/value of locale/l20n from file.
+    /// key/value of locale/string from file.
 
     #[allow(unused_must_use)]
     fn parse_i20n (

@@ -12,13 +12,15 @@ extern crate router;
 extern crate iron;
 
 pub mod protocol;
-mod lang;
+mod middleware;
 
 use std::error::Error;
 
 pub fn index (
-    _: &mut iron::request::Request,
+    req: &mut iron::request::Request,
 ) -> iron::IronResult<iron::response::Response> {
+    let conn = req.extensions.get::<middleware::ShareLang>().unwrap();
+
     use iron::modifier::Set;
     let mut resp: iron::response::Response = iron::response::Response::new();
 
@@ -37,7 +39,7 @@ pub fn new (
     address: &str,
 ) {
     let mut hbse = handlebars_iron::HandlebarsEngine::new2();
-    let lang = lang::Lang::new(locale);
+    let lang = middleware::ShareLang::new(locale).unwrap();
 
     hbse.add(std::boxed::Box::new (
         handlebars_iron::DirectorySource::new (
@@ -54,6 +56,7 @@ pub fn new (
 
     let mut chain = iron::middleware::Chain::new(router);
 
+    chain.link_before(lang);
     chain.link_after(hbse);
 
     println!("Server running at {}://{}/", protocol, address);

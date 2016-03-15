@@ -15,7 +15,7 @@ const DEFAULT_TEMPLATE: &'static str = "templates";
 const DEFAULT_LOCALE: &'static str = "locales";
 const DEFAULT_CERT: &'static str = "ca/cert.pem";
 const DEFAULT_KEY: &'static str = "ca/key.pem";
-const DEFAULT_PROTOCOL: &'static str = "http";
+const DEFAULT_PROTOCOL: &'static str = "https";
 const DEFAULT_ADDRESS: &'static str = "localhost";
 const DEFAULT_SOCKET: &'static str = "3000";
 

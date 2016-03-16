@@ -13,6 +13,11 @@
 [coverage-badge]: https://coveralls.io/repos/github/adjivas/pasteur/badge.svg?branch=master&style=flat-square
 [coverage]: https://coveralls.io/github/adjivas/pasteur?branch=master
 
+#### GraphShot-Dependency:
+![GraphShot](graph.png)
+
+[graph]: graph.png
+
 #### Directory-Tree:
 ```
 .
@@ -23,6 +28,9 @@
 |__ CHANGELOG.md
 |__ templates/*
 \__ src
+    |__ middleware/
+    |__ controllers/
+    |__ models/
     |__ lib.rs
     \__ main.rs
 ```

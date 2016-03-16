@@ -38,33 +38,57 @@ impl ShareLang {
 			pool: std::sync::Arc::new(lang),
 		}
 	}
+
+	/// The `get_table` function returns the good table from Arc
+	/// according to the locale lang.
+
+	pub fn get_table (
+		&self,
+		locale: String,
+	) -> Option<std::collections::HashMap<String, String>> {
+		self.pool.get_table(locale)
+	}
+
+	/// The `get_table_from_env` function returns the good table from Arc
+	/// according to the locale lang and a environement.
+
+	pub fn get_table_from_env (
+		&self,
+		locale: String,
+		env: &std::collections::HashMap<String, String>,
+	) -> Option<std::collections::HashMap<String, String>> {
+		self.pool.get_table_from_env(locale, env)
+	}
 }
 
 /// The `Key` sets our type to list of extension.
 
 impl iron::typemap::Key for ShareLang {
-	type Value = Lang;
+	type Value = std::sync::Arc<Lang>;
 }
 
 /// The `BeforeMiddleware` links this middleware with the chain.
 
 impl iron::BeforeMiddleware for ShareLang {
-	fn before(&self, _: &mut iron::Request) -> iron::IronResult<()> {
+	fn before(&self, req: &mut iron::Request) -> iron::IronResult<()> {
+		req.extensions.insert::<ShareLang>(self.pool.clone());
 		Ok(())
 	}
 }
 
 /// The `Lang` structure defines the international table of translation.
 
-type Directionary = std::collections::HashMap<String, l20n::Locale>; // alias.
+type Directionary = std::collections::HashMap<String, l20n::Locale>; // alias
+type Environement = std::collections::HashMap<String, String>; // environement
 
 pub struct Lang {
     table: Directionary, // locale, l20n's directionary.
+	env: Environement, // environement.
 }
 
 impl Lang {
 
-    /// The `from_directory` constructor function returns the `Lang` from
+    /// The `new` constructor function returns the `Lang` from
     /// argument path.
 
     pub fn new (
@@ -72,16 +96,46 @@ impl Lang {
     ) -> std::io::Result<Self> {
         let mut lang: Self = Lang {
             table: std::collections::HashMap::new(),
+			env: std::collections::HashMap::new(),
         };
 
-        try!(lang.from_directory(std::path::Path::new(locale)));
+        try!(lang.add_directory(std::path::Path::new(locale)));
         Ok(lang)
     }
 
-    /// The `from_directory` function returns the `Lang` from
+	/// The `get_table` function returns the good table according to
+	/// the locale lang.
+
+	pub fn get_table (
+		&self,
+		locale: String,
+	) -> Option<std::collections::HashMap<String, String>> {
+		self.get_table_from_env(locale, &self.env)
+	}
+
+	/// The `get_table_from_env` function returns the good table according to
+	/// the locale lang and a environement.
+
+	pub fn get_table_from_env (
+		&self,
+		locale: String,
+		env: &std::collections::HashMap<String, String>,
+	) -> Option<std::collections::HashMap<String, String>> {
+		if let Some(l20n) = self.table.get(&locale) {
+			match l20n.localize_data(&env) {
+				Ok(data) => Some(data),
+				Err(_) => None,
+			}
+		}
+		else {
+			None
+		}
+	}
+
+    /// The `add_directory` function returns the `Lang` from
     /// unrecursively directory.
 
-    fn from_directory (
+    fn add_directory (
         &mut self,
         path: &std::path::Path,
     ) -> std::io::Result<()> {

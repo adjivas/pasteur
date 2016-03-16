@@ -16,12 +16,14 @@ mod middleware;
 
 use std::error::Error;
 use iron::modifier::Set;
-use iron::headers::AcceptLanguage;
 
 pub fn index (
     req: &mut iron::request::Request,
 ) -> iron::IronResult<iron::response::Response> {
-    println!("{:?}", req.headers.get_raw("accept-language") );
+    match req.headers.get::<iron::headers::AcceptLanguage>() {
+        Some(lang) => println!("AcceptLanguage: {:?}", lang),
+        None => println!("!AcceptLanguage"),
+    }
 
     match req.extensions.get::<middleware::ShareLang>() {
         Some(lang) => println!("work {:?}", lang.get_table("en-US".to_string())),

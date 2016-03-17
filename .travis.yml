@@ -23,8 +23,7 @@ script:
   travis-cargo build &&
   travis-cargo test &&
   travis-cargo bench &&
-  cargo rustdoc -- --no-defaults --passes "collapse-docs" --passes "unindent-comments" &&
-  travis-cargo --only nightly doc
+  cargo rustdoc -- --no-defaults --passes "collapse-docs" --passes "unindent-comments"
 after_success:
 - travis-cargo --only nightly doc-upload
 - travis-cargo coveralls --no-sudo --verify

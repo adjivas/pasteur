@@ -8,18 +8,7 @@ addons:
     - libdw-dev
     - binutils-dev
 rust:
-  - stable
   - nightly
-  - beta
-matrix:
-  allow_failures:
-  - rust: beta
-    env: FEATURES=lint
-  - rust: stable
-    env: FEATURES=lint
-exclude:
-  - rust: nightly
-    env: FEATURES=lint
 os:
 - linux
 branches:
@@ -34,9 +23,9 @@ script:
   travis-cargo build &&
   travis-cargo test &&
   travis-cargo bench &&
-  travis-cargo --only stable doc -- --no-defaults --passes "collapse-docs" --passes "unindent-comments"
+  travis-cargo --only nightly doc -- --no-defaults --passes "collapse-docs" --passes "unindent-comments"
 after_success:
-- travis-cargo --only stable doc-upload
+- travis-cargo --only nightly doc-upload
 - travis-cargo coveralls --no-sudo --verify
 env:
   matrix:

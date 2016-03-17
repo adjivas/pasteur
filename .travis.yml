@@ -11,17 +11,14 @@ rust:
   - stable
   - nightly
   - beta
-  - 1.7.0
 matrix:
   allow_failures:
-  - rust: nightly
-    env: FEATURES=lint
   - rust: beta
     env: FEATURES=lint
   - rust: stable
     env: FEATURES=lint
 exclude:
-  - rust: 1.7.0
+  - rust: nightly
     env: FEATURES=lint
 os:
 - linux

@@ -37,7 +37,7 @@ script:
   travis-cargo build &&
   travis-cargo test &&
   travis-cargo bench &&
-  travis-cargo --only stable doc
+  travis-cargo --only stable doc -- --no-defaults --passes "collapse-docs" --passes "unindent-comments"
 after_success:
 - travis-cargo --only stable doc-upload
 - travis-cargo coveralls --no-sudo --verify

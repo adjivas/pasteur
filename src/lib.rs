@@ -5,38 +5,18 @@
 // This file may not be copied, modified, or distributed
 // except according to those terms.
 
-extern crate rustc_serialize;
 extern crate handlebars_iron;
-extern crate handlebars;
 extern crate router;
 extern crate iron;
+extern crate l20n;
 
 pub mod protocol;
+mod views;
 mod middleware;
 
 use std::error::Error;
-use iron::modifier::Set;
 
-pub fn index (
-    req: &mut iron::request::Request,
-) -> iron::IronResult<iron::response::Response> {
-    match req.headers.get::<iron::headers::AcceptLanguage>() {
-        Some(lang) => println!("AcceptLanguage: {:?}", lang),
-        None => println!("!AcceptLanguage"),
-    }
-
-    match req.extensions.get::<middleware::ShareLang>() {
-        Some(lang) => println!("work {:?}", lang.get_table("en-US".to_string())),
-        None => println!("fail"),
-    }
-
-    let mut resp: iron::response::Response = iron::response::Response::new();
-
-    resp.set_mut(handlebars_iron::Template::new("index", ())).set_mut(iron::status::Ok);
-    Ok(resp)
-}
-
-/// The `new` function instantiates the server.
+/// The `new` function instancies the server.
 
 pub fn new (
     template: &str,
@@ -60,7 +40,7 @@ pub fn new (
 
     let mut router = router::Router::new();
 
-    router.get("/", index);
+    router.get("/", views::index);
 
     let mut chain = iron::middleware::Chain::new(router);
 

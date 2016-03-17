@@ -20,13 +20,7 @@ unstable = [] # for travis-cargo
 version = "*"
 features = ["yaml", "suggestions", "color"]
 
-[dependencies.rustc-serialize]
-version = "*"
-
 [dependencies.handlebars-iron]
-version = "*"
-
-[dependencies.handlebars]
 version = "*"
 
 [dependencies.router]

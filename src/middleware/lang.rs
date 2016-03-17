@@ -6,15 +6,16 @@
 // except according to those terms.
 
 extern crate std;
-extern crate l20n;
-extern crate iron;
 
 use std::io::Read;
+
+use l20n;
+use iron;
 
 /// The `ShareLang` structure defines and shares the lang by Arc.
 
 pub struct ShareLang {
-	pool: std::sync::Arc<Lang>,
+	source: std::sync::Arc<Lang>,
 }
 
 impl ShareLang {
@@ -23,9 +24,9 @@ impl ShareLang {
     /// directory source's locale.
 
     pub fn new (
-        locale: &str,
+        locale_source: &str,
     ) -> std::io::Result<Self> {
-        let lang = try!(Lang::new(locale));
+        let lang = try!(Lang::new(locale_source));
 
         Ok(ShareLang::from_lang(lang))
     }
@@ -35,46 +36,86 @@ impl ShareLang {
 
 	pub fn from_lang (lang: Lang) -> Self {
 		ShareLang {
-			pool: std::sync::Arc::new(lang),
+			source: std::sync::Arc::new(lang),
 		}
-	}
-
-	/// The `get_table` function returns the good table from Arc
-	/// according to the locale lang.
-
-	pub fn get_table (
-		&self,
-		locale: String,
-	) -> Option<std::collections::HashMap<String, String>> {
-		self.pool.get_table(locale)
-	}
-
-	/// The `get_table_from_env` function returns the good table from Arc
-	/// according to the locale lang and a environement.
-
-	pub fn get_table_from_env (
-		&self,
-		locale: String,
-		env: &std::collections::HashMap<String, String>,
-	) -> Option<std::collections::HashMap<String, String>> {
-		self.pool.get_table_from_env(locale, env)
 	}
 }
 
 /// The `Key` sets our type to list of extension.
 
 impl iron::typemap::Key for ShareLang {
-	type Value = std::sync::Arc<Lang>;
+	type Value = DesctiptionLang;
 }
 
 /// The `BeforeMiddleware` links this middleware with the chain.
 
 impl iron::BeforeMiddleware for ShareLang {
-	fn before(&self, req: &mut iron::Request) -> iron::IronResult<()> {
-		req.extensions.insert::<ShareLang>(self.pool.clone());
+
+	/// The `before` constructor function sets the key from typemap with
+	/// the interface `ShareLang`.
+
+	fn before (&self, req: &mut iron::Request) -> iron::IronResult<()> {
+		if let Some(accept) = req.headers.get::<iron::headers::AcceptLanguage>() {
+			req.extensions.insert::<ShareLang> (
+				DesctiptionLang::new (
+					self.source.clone(),
+					(accept).iter().filter_map(|lang|
+						match (&lang.item.language, &lang.item.region) {
+							(&Some(ref language), &Some(ref region)) => {
+								let lang: &String = &format!("{}-{}", &language, &region);
+								if self.source.check_get(lang) {
+									Some(lang.clone())
+								}
+								else {
+									None
+								}
+							},
+							_ => None,
+						}
+					).collect::<Vec<String>>()
+				)
+			);
+		}
 		Ok(())
 	}
 }
+
+/// The `DesctiptionLang` structure defines an interface
+/// to get sentence internationalized.
+
+pub struct DesctiptionLang {
+	lang: std::sync::Arc<Lang>,
+	locales: Vec<String>, // languages.
+	locale: String, // default lang.
+}
+
+impl DesctiptionLang {
+
+	/// The `new` constructor function returns the `DesctiptionLang` to store
+	/// the lang header.
+
+	pub fn new (
+		lang: std::sync::Arc<Lang>,
+		locales: Vec<String>,
+	) -> Self {
+		DesctiptionLang {
+			lang: lang,
+			locales: locales.clone(),
+			locale: if let Some(locale) = locales.get(0) {
+				locale.clone()
+			} else {
+				"en-US".to_string()
+			},
+		}
+	}
+
+	pub fn get_table (
+		&self,
+	) -> Option<std::collections::HashMap<String, String>> {
+		self.lang.get_table(&self.locale)
+	}
+}
+
 
 /// The `Lang` structure defines the international table of translation.
 
@@ -92,14 +133,14 @@ impl Lang {
     /// argument path.
 
     pub fn new (
-        locale: &str,
+        locale_source: &str,
     ) -> std::io::Result<Self> {
         let mut lang: Self = Lang {
             table: std::collections::HashMap::new(),
 			env: std::collections::HashMap::new(),
         };
 
-        try!(lang.add_directory(std::path::Path::new(locale)));
+        try!(lang.add_directory(std::path::Path::new(locale_source)));
         Ok(lang)
     }
 
@@ -108,20 +149,21 @@ impl Lang {
 
 	pub fn get_table (
 		&self,
-		locale: String,
+		locale: &String,
 	) -> Option<std::collections::HashMap<String, String>> {
 		self.get_table_from_env(locale, &self.env)
 	}
+
 
 	/// The `get_table_from_env` function returns the good table according to
 	/// the locale lang and a environement.
 
 	pub fn get_table_from_env (
 		&self,
-		locale: String,
+		locale: &String,
 		env: &std::collections::HashMap<String, String>,
 	) -> Option<std::collections::HashMap<String, String>> {
-		if let Some(l20n) = self.table.get(&locale) {
+		if let Some(l20n) = self.table.get(locale) {
 			match l20n.localize_data(&env) {
 				Ok(data) => Some(data),
 				Err(_) => None,
@@ -130,6 +172,16 @@ impl Lang {
 		else {
 			None
 		}
+	}
+
+	/// The `check_get` function returns a boolean
+	/// for `locale` language member from `table`.
+
+	pub fn check_get (
+		&self,
+		locale: &String,
+	) -> bool {
+		self.table.get(locale).is_some()
 	}
 
     /// The `add_directory` function returns the `Lang` from
@@ -168,16 +220,16 @@ impl Lang {
         if path.extension() == Some(std::ffi::OsStr::new("l20n")) {
             if let Some(file_name_ostr) = path.file_name() {
                 if let Some(file_name) = file_name_ostr.to_str() {
-					let (index, content): (String, String) = try!(
+					let (name_parsed, content): (String, String) = try!(
 						self.parse_i20n(path, file_name)
 					);
 
-					locale.add_resource(&content).unwrap();
-					name = index;
+					locale.add_resource(&content);
+					name = name_parsed;
                 }
             }
         }
-        Ok((name, locale))
+		Ok((name, locale))
     }
 
 	/// The `parse_i20n` function returns the tuple
@@ -189,15 +241,11 @@ impl Lang {
 		path: &std::path::Path,
 		file_name: &str,
 	) -> std::io::Result<(String, String)> {
+		let name = file_name.chars().take_while(|&l| l != '.').collect::<String>();
 		let mut buff: String = String::new();
-		let mut file: std::fs::File = try!(std::fs::File::open (
-			&path
-		));
+		let mut file: std::fs::File = try!(std::fs::File::open(&path));
 
-		file.read_to_string(&mut buff);
-		Ok((
-			file_name.chars().take_while(|&l|l != '.').collect::<String>(),
-			buff
-		))
+		try!(file.read_to_string(&mut buff));
+		Ok((name, buff))
 	}
 }

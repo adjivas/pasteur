@@ -13,11 +13,6 @@
 [coverage-badge]: https://coveralls.io/repos/github/adjivas/pasteur/badge.svg?branch=master&style=flat-square
 [coverage]: https://coveralls.io/github/adjivas/pasteur?branch=master
 
-#### GraphShot-Dependency:
-![GraphShot](graph.png)
-
-[graph]: graph.png
-
 #### Directory-Tree:
 ```
 .
@@ -63,6 +58,11 @@ SUBCOMMANDS:
     test    controls testing features
 ```
 
+#### GraphShot-Dependency:
+![GraphShot](graph.png)
+
+[graph]: graph.png
+
 #### License:
 **pasteur**'s code in this repo is licensed under either of:
 
@@ -74,7 +74,6 @@ uses the [APACHE][license-mit] and [MIT][license-apache] license.
 [license-mit]: https://github.com/adjivas/pasteur/blob/master/LICENSE-MIT
 
 at your option.
-
 
 #### Contribution:
 

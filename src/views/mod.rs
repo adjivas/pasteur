@@ -5,7 +5,6 @@
 // This file may not be copied, modified, or distributed
 // except according to those terms.
 
-mod lang;
+mod index;
 
-pub use self::lang::ShareLang;
-pub use self::lang::DesctiptionLang;
+pub use self::index::index;

@@ -1,6 +1,6 @@
 # Pasteur
 
-[![travis-badge][]][travis] [![coverage-badge][]][coverage] [![docs-badge][]][docs] [![license-badge][]][license] [![gitter-badge][]][gitter]
+[![travis-badge][]][travis] [![coverage-badge][]][coverage] [![clippy-badge][]][clippy] [![docs-badge][]][docs] [![license-badge][]][license] [![gitter-badge][]][gitter]
 
 [license-badge]: https://img.shields.io/crates/l/cublas.svg?style=flat-square
 [license]: https://github.com/adjivas/pasteur/blob/master/README.md#license
@@ -12,6 +12,8 @@
 [travis]: https://travis-ci.org/adjivas/pasteur
 [coverage-badge]: https://coveralls.io/repos/github/adjivas/pasteur/badge.svg?branch=master&style=flat-square
 [coverage]: https://coveralls.io/github/adjivas/pasteur?branch=master
+[clippy-badge]: https://clippy.bashy.io/github/adjivas/pasteur/master/badge.svg?style=flat-square
+[clippy]: https://clippy.bashy.io/github/adjivas/pasteur/master/log
 
 #### Directory-Tree:
 ```

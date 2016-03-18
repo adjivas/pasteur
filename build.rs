@@ -5,7 +5,11 @@
 // This file may not be copied, modified, or distributed
 // except according to those terms.
 
-mod lang;
+extern crate sass_rs;
 
-pub use self::lang::ShareLang;
-pub use self::lang::DesctiptionLang;
+pub fn main() {
+    let input = "etc/stylesheets/sample.scss";
+    let mut file_context = sass_rs::sass_context::SassFileContext::new(&input);
+
+    file_context.compile().unwrap();
+}

@@ -5,6 +5,9 @@
 // This file may not be copied, modified, or distributed
 // except according to those terms.
 
+//! The `protocol` module defines the list protocol supported
+//! by the server.
+
 extern crate std;
 
 /// The `Protocol` enumerator defines the list of

@@ -23,7 +23,7 @@
 |__ CHANGELOG.md
 |__ templates/*
 \__ src
-    |__ middleware/
+    |__ middlewares/
     |__ controllers/
     |__ models/
     |__ lib.rs

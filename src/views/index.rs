@@ -5,7 +5,7 @@
 // This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use middleware;
+use middlewares;
 
 use handlebars_iron;
 use iron;
@@ -16,7 +16,7 @@ pub fn index (
 ) -> iron::IronResult<iron::response::Response> {
     let mut resp: iron::response::Response = iron::response::Response::new();
 
-    if let Some(shared_lang) = req.extensions.get::<middleware::ShareLang>() {
+    if let Some(shared_lang) = req.extensions.get::<middlewares::ShareLang>() {
         if let Some(lang) = shared_lang.get_table() {
             resp.set_mut(handlebars_iron::Template::new("index", lang))
                 .set_mut(iron::status::Ok);

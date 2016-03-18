@@ -11,10 +11,10 @@ extern crate pasteur;
 
 /// Default* const arguments defined by CLI.
 
-const DEFAULT_TEMPLATE: &'static str = "templates";
-const DEFAULT_LOCALE: &'static str = "locales";
-const DEFAULT_CERT: &'static str = "ca/cert.pem";
-const DEFAULT_KEY: &'static str = "ca/key.pem";
+const DEFAULT_TEMPLATE: &'static str = "etc/templates";
+const DEFAULT_LOCALE: &'static str = "etc/locales";
+const DEFAULT_CERT: &'static str = "etc/ca/cert.pem";
+const DEFAULT_KEY: &'static str = "etc/ca/key.pem";
 const DEFAULT_PROTOCOL: &'static str = "https";
 const DEFAULT_ADDRESS: &'static str = "localhost";
 const DEFAULT_SOCKET: &'static str = "3000";

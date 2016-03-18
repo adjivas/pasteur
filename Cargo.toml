@@ -8,10 +8,7 @@ repository = "https://github.com/adjivas/pasteur.git"
 readme = "README.md"
 keywords = ["rust", "iron", "autism", "reference"]
 license = "MIT OR Apache-2.0"
-
-[[bin]]
-name = "pasteur"
-doc = false
+build = "build.rs"
 
 [features]
 unstable = [] # for travis-cargo
@@ -30,4 +27,7 @@ version = "*"
 version = "*"
 
 [dependencies.l20n]
+version = "*"
+
+[build-dependencies.sass-rs]
 version = "*"

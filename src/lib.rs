@@ -12,7 +12,7 @@ extern crate l20n;
 
 pub mod protocol;
 mod views;
-mod middleware;
+mod middlewares;
 
 use std::error::Error;
 
@@ -27,7 +27,7 @@ pub fn new (
     address: &str,
 ) {
     let mut hbse = handlebars_iron::HandlebarsEngine::new2();
-    let lang = middleware::ShareLang::new(locale).unwrap();
+    let lang = middlewares::ShareLang::new(locale).unwrap();
 
     hbse.add(std::boxed::Box::new (
         handlebars_iron::DirectorySource::new (

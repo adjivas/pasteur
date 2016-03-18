@@ -5,8 +5,9 @@
 // This file may not be copied, modified, or distributed
 // except according to those terms.
 
-//! The `views` module contents all the public pages.
+//! The `middlewares` module contents all the public pages
 
-mod index;
+mod lang;
 
-pub use self::index::index;
+pub use self::lang::ShareLang;
+pub use self::lang::DesctiptionLang;

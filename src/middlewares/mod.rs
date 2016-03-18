@@ -8,6 +8,7 @@
 //! The `middlewares` module contents all the public pages
 
 mod lang;
+mod style;
 
-pub use self::lang::ShareLang;
-pub use self::lang::DesctiptionLang;
+pub use self::lang::{ShareLang, DesctiptionLang};
+pub use self::style::ShareStyle;

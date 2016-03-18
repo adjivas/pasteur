@@ -13,6 +13,7 @@ extern crate pasteur;
 
 const DEFAULT_TEMPLATE: &'static str = "etc/templates";
 const DEFAULT_LOCALE: &'static str = "etc/locales";
+const DEFAULT_STYLE: &'static str = "etc/stylesheets";
 const DEFAULT_CERT: &'static str = "etc/ca/cert.pem";
 const DEFAULT_KEY: &'static str = "etc/ca/key.pem";
 const DEFAULT_PROTOCOL: &'static str = "https";
@@ -29,6 +30,7 @@ pub fn main () {
     pasteur::new (
         options.value_of("template").unwrap_or(DEFAULT_TEMPLATE),
         options.value_of("locale").unwrap_or(DEFAULT_LOCALE),
+        options.value_of("style").unwrap_or(DEFAULT_STYLE),
         options.value_of("cert").unwrap_or(DEFAULT_CERT),
         options.value_of("key").unwrap_or(DEFAULT_KEY),
         pasteur::protocol::Protocol::from_str (

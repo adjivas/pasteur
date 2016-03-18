@@ -5,6 +5,8 @@
 // This file may not be copied, modified, or distributed
 // except according to those terms.
 
+extern crate std;
+
 use middlewares;
 
 use handlebars_iron;
@@ -15,12 +17,19 @@ pub fn index (
     req: &mut iron::request::Request,
 ) -> iron::IronResult<iron::response::Response> {
     let mut resp: iron::response::Response = iron::response::Response::new();
+    let mut data: std::collections::HashMap<String, String> = std::collections::HashMap::new();
 
     if let Some(shared_lang) = req.extensions.get::<middlewares::ShareLang>() {
         if let Some(lang) = shared_lang.get_table() {
-            resp.set_mut(handlebars_iron::Template::new("index", lang))
-                .set_mut(iron::status::Ok);
+
         }
     }
+    if let Some(shared_style) = req.extensions.get::<middlewares::ShareStyle>() {
+        if let Some(sheet) = shared_style.get_sheet(&"sample".to_string()) {
+            data.insert("style".to_string(), sheet.clone());
+        }
+    }
+    resp.set_mut(handlebars_iron::Template::new("index", data))
+        .set_mut(iron::status::Ok);
     Ok(resp)
 }

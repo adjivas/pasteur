@@ -15,23 +15,6 @@
 [clippy-badge]: https://clippy.bashy.io/github/adjivas/pasteur/master/badge.svg?style=flat-square
 [clippy]: https://clippy.bashy.io/github/adjivas/pasteur/master/log
 
-#### Directory-Tree:
-```
-.
-|__ Cargo.toml
-|__ LICENSE-APACHE
-|__ LICENSE-MIT
-|__ README.md
-|__ CHANGELOG.md
-|__ templates/*
-\__ src
-    |__ middlewares/
-    |__ controllers/
-    |__ models/
-    |__ lib.rs
-    \__ main.rs
-```
-
 #### CLI:
 See command **help**:
 ```
@@ -53,6 +36,7 @@ OPTIONS:
     -l, --source-locale <locale>        Defines the locale's directory.
     -p, --protocol <protocol>           Defines the protocol. [values: http, https]
     -s, --socket <socket>               Defines the port.
+    -y, --style-locale <style>          Defines the style's directory.
     -t, --source-template <template>    Defines the template's directory.
 
 SUBCOMMANDS:
@@ -60,7 +44,49 @@ SUBCOMMANDS:
     test    controls testing features
 ```
 
+#### Directory-Tree:
+```
+.
+|__ Cargo.lock
+|__ Cargo.toml
+|__ LICENSE_APACHE
+|__ LICENSE_MIT
+|__ etc
+|   |__ ca
+|   |   |__ cert.pem
+|   |   \__ key.pem
+|   |__ locales
+|   |   |__ en_US.l20n
+|   |   \__ fr_FR.l20n
+|   |__ stylesheets
+|   |   |__ index.scss
+|   |   |__ book.scss
+|   |   \__ nav.scss
+|   \__ templates
+|       |__ index.hbs
+|       |__ book
+|       |   \__ prologue.hbs
+|       \__ nav/...
+|__ graph.png
+|__ rustfmt.toml
+\__ src
+    |__ cli.yml
+    |__ lib.rs
+    |__ main.rs
+    |__ middlewares
+    |   |__ mod.rs
+    |   |__ lang.rs
+    |   \__ style.rs
+    |__ protocol.rs
+    \__ views
+        |__ mod.rs
+        |__ index.rs
+        |__ book/prologue.rs
+        \__ nav/...
+```
+
 #### GraphShot-Dependency:
+Many thanks goes to:
 ![GraphShot](graph.png)
 
 [graph]: graph.png
@@ -69,8 +95,8 @@ SUBCOMMANDS:
 **pasteur**'s code in this repo is licensed under either of:
 
 uses the [APACHE][license-mit] and [MIT][license-apache] license.
- * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0)
- * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT)
+ * Apache License, Version 2.0, ([LICENSE-APACHE](LICENSE-APACHE) or http://www.apache.org/licenses/LICENSE-2.0).
+ * MIT license ([LICENSE-MIT](LICENSE-MIT) or http://opensource.org/licenses/MIT).
 
 [license-apache]: https://github.com/adjivas/pasteur/blob/master/LICENSE-APACHE
 [license-mit]: https://github.com/adjivas/pasteur/blob/master/LICENSE-MIT

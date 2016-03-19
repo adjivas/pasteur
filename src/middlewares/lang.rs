@@ -140,7 +140,7 @@ impl Lang {
 			env: std::collections::HashMap::new(),
         };
 
-        try!(lang.add_directory(std::path::Path::new(locale_source)));
+        try!(lang.add_from_directory(std::path::Path::new(locale_source)));
         Ok(lang)
     }
 
@@ -184,10 +184,10 @@ impl Lang {
 		self.table.get(locale).is_some()
 	}
 
-    /// The `add_directory` function returns the `Lang` from
+    /// The `add_from_directory` function returns the `Lang` from
     /// unrecursively directory.
 
-    fn add_directory (
+    fn add_from_directory (
         &mut self,
         path: &std::path::Path,
     ) -> std::io::Result<()> {

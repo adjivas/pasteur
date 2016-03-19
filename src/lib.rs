@@ -51,6 +51,7 @@
 //!     test    controls testing features
 //! ```
 
+extern crate sass_rs;
 extern crate handlebars_iron;
 extern crate router;
 extern crate iron;
@@ -67,13 +68,13 @@ use std::error::Error;
 pub fn new (
     template: &str,
     locale: &str,
+    style: &str,
     cert: &str,
     key: &str,
     protocol: protocol::Protocol,
     address: &str,
 ) {
     let mut hbse = handlebars_iron::HandlebarsEngine::new2();
-    let lang = middlewares::ShareLang::new(locale).unwrap();
 
     hbse.add(std::boxed::Box::new (
         handlebars_iron::DirectorySource::new (
@@ -87,10 +88,12 @@ pub fn new (
     let mut router = router::Router::new();
 
     router.get("/", views::index);
+    router.get("/book/prologue", views::generic::prologue);
 
     let mut chain = iron::middleware::Chain::new(router);
 
-    chain.link_before(lang);
+    chain.link_before(middlewares::ShareLang::new(locale).unwrap());
+    chain.link_before(middlewares::ShareStyle::new(style).unwrap());
     chain.link_after(hbse);
 
     println!("Server running at {}://{}/", protocol, address);

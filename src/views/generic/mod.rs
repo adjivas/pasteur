@@ -5,11 +5,9 @@
 // This file may not be copied, modified, or distributed
 // except according to those terms.
 
-extern crate sass_rs;
+//! The `views/generic` module contents all the public pages
+//! with a generic style.
 
-pub fn main() {
-    let input = "etc/stylesheets/sample.scss";
-    let mut file_context = sass_rs::sass_context::SassFileContext::new(&input);
+pub mod prologue;
 
-    file_context.compile().unwrap();
-}
+pub use self::prologue::prologue;

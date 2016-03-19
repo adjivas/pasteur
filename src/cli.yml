@@ -15,6 +15,11 @@ args:
         short: l
         long: source-locale
         takes_value: true
+    - style:
+        help: Defines the style's directory.
+        short: y
+        long: style-locale
+        takes_value: true
     - protocol:
         help: Defines the protocol.
         short: p

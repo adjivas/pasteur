@@ -13,7 +13,7 @@ use handlebars_iron;
 use iron;
 use iron::modifier::Set;
 
-pub fn index (
+pub fn prologue (
     req: &mut iron::request::Request,
 ) -> iron::IronResult<iron::response::Response> {
     let mut resp: iron::response::Response = iron::response::Response::new();
@@ -25,11 +25,11 @@ pub fn index (
         }
     }
     if let Some(shared_style) = req.extensions.get::<middlewares::ShareStyle>() {
-        if let Some(sheet) = shared_style.get_sheet(&"index".to_string()) {
+        if let Some(sheet) = shared_style.get_sheet(&"book".to_string()) {
             data.insert("style".to_string(), sheet.clone());
         }
     }
-    resp.set_mut(handlebars_iron::Template::new("index", data))
+    resp.set_mut(handlebars_iron::Template::new("prologue", data))
         .set_mut(iron::status::Ok);
     Ok(resp)
 }

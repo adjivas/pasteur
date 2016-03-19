@@ -27,7 +27,7 @@
 //!
 //! ```
 //! Pasteur
-//! adjivas <adjivas@users.noreply.github.com>
+//! adjivas adjivas@users.noreply.github.com
 //! A WebSite who synthesize all the knowledge about the autism
 //!
 //! USAGE:

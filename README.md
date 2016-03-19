@@ -15,23 +15,6 @@
 [clippy-badge]: https://clippy.bashy.io/github/adjivas/pasteur/master/badge.svg?style=flat-square
 [clippy]: https://clippy.bashy.io/github/adjivas/pasteur/master/log
 
-#### Directory-Tree:
-```
-.
-|__ Cargo.toml
-|__ LICENSE-APACHE
-|__ LICENSE-MIT
-|__ README.md
-|__ CHANGELOG.md
-|__ templates/*
-\__ src
-    |__ middlewares/
-    |__ controllers/
-    |__ models/
-    |__ lib.rs
-    \__ main.rs
-```
-
 #### CLI:
 See command **help**:
 ```
@@ -59,7 +42,47 @@ OPTIONS:
 SUBCOMMANDS:
     help    Prints this message
     test    controls testing features
+```
 
+#### Directory-Tree:
+```
+.
+|__ Cargo.lock
+|__ Cargo.toml
+|__ LICENSE_APACHE
+|__ LICENSE_MIT
+|__ etc
+|   |__ ca
+|   |   |__ cert.pem
+|   |   \__ key.pem
+|   |__ locales
+|   |   |__ en_US.l20n
+|   |   \__ fr_FR.l20n
+|   |__ stylesheets
+|   |   |__ index.scss
+|   |   |__ book.scss
+|   |   \__ nav.scss
+|   \__ templates
+|       |__ index.hbs
+|       |__ book
+|       |   \__ prologue.hbs
+|       \__ nav/...
+|__ graph.png
+|__ rustfmt.toml
+\__ src
+    |__ cli.yml
+    |__ lib.rs
+    |__ main.rs
+    |__ middlewares
+    |   |__ mod.rs
+    |   |__ lang.rs
+    |   \__ style.rs
+    |__ protocol.rs
+    \__ views
+        |__ mod.rs
+        |__ index.rs
+        |__ book/prologue.rs
+        \__ nav/...
 ```
 
 #### GraphShot-Dependency:

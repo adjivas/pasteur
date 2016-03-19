@@ -42,6 +42,7 @@ pub fn new (
     let mut router = router::Router::new();
 
     router.get("/", views::index);
+    router.get("/book/prologue", views::generic::prologue);
 
     let mut chain = iron::middleware::Chain::new(router);
 

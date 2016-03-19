@@ -5,9 +5,9 @@
 // This file may not be copied, modified, or distributed
 // except according to those terms.
 
-//! The `views` module contents all the public pages.
+//! The `views/generic` module contents all the public pages
+//! with a generic style.
 
-mod index;
-pub mod generic;
+pub mod prologue;
 
-pub use self::index::index;
+pub use self::prologue::prologue;

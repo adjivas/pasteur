@@ -21,11 +21,11 @@ pub fn index (
 
     if let Some(shared_lang) = req.extensions.get::<middlewares::ShareLang>() {
         if let Some(lang) = shared_lang.get_table() {
-
+            data.extend(lang);
         }
     }
     if let Some(shared_style) = req.extensions.get::<middlewares::ShareStyle>() {
-        if let Some(sheet) = shared_style.get_sheet(&"sample".to_string()) {
+        if let Some(sheet) = shared_style.get_sheet(&"index".to_string()) {
             data.insert("style".to_string(), sheet.clone());
         }
     }

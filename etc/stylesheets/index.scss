@@ -1,0 +1,29 @@
+$max: 100%;
+$background: rgba(34, 34, 34, 1);
+$foreground: rgba(240, 240, 240, 1);
+$sublineage: rgba(102, 102, 102, 1);
+
+body {
+  position: absolute;
+  margin: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: $background;
+  width: $max;
+  height: $max;
+  h1 {
+    padding: .1em .4em;
+    border-bottom: 2px solid $sublineage;
+  }
+  a {
+    text-decoration: none;
+    color: $foreground;
+    font-family: 'OFL Sorts Mill Goudy TT',
+                 'Palatino Linotype',
+                 'Book Antiqua',
+                 'Palatino',
+                 'serif';
+  }
+}

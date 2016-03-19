@@ -166,7 +166,12 @@ impl Style {
 					input = file_name.chars().take_while(|&l|
 						l != '.'
 					).collect::<String>();
-					//sheet = sass_rs::sass_context::SassFileContext::new(&input).compile().unwrap();
+					sheet = match sass_rs::sass_context::SassFileContext::new (
+						&format!("{}", path.display())
+					).compile() {
+						Ok(sheet) => sheet,
+						Err(why) => return Err(std::io::Error::new(std::io::ErrorKind::Other, why)),
+					};
                 }
             }
         }

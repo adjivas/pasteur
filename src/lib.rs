@@ -26,29 +26,29 @@
 //! See command **help**:
 //!
 //! ```
-//! Pasteur
-//! adjivas adjivas@users.noreply.github.com
-//! A WebSite who synthesize all the knowledge about the autism
-//!
-//! USAGE:
-//! 	pasteur [FLAGS] [OPTIONS] [SUBCOMMAND]
-//!
-//! FLAGS:
-//!     -h, --help       Prints help information
-//!      -V, --version    Prints version information
-//!
-//!  OPTIONS:
-//!     -a, --address <address>             Defines the ip's address.
-//!     -c, --ca-cert <cert>                Defines the cert.pem's certificat.
-//!     -k, --ca-key <key>                  Defines the key.pem's certificat.
-//!     -l, --source-locale <locale>        Defines the locale's directory.
-//!     -p, --protocol <protocol>           Defines the protocol. [values: http, https]
-//!     -s, --socket <socket>               Defines the port.
-//!     -t, --source-template <template>    Defines the template's directory.
-//!
-//! SUBCOMMANDS:
-//!     help    Prints this message
-//!     test    controls testing features
+//! /// Pasteur
+//! /// adjivas <adjivas@users.noreply.github.com>
+//! /// A WebSite who synthesize all the knowledge about the autism
+//! ///
+//! /// USAGE:
+//! /// 	pasteur [FLAGS] [OPTIONS] [SUBCOMMAND]
+//! ///
+//! /// FLAGS:
+//! ///     -h, --help       Prints help information
+//! ///      -V, --version    Prints version information
+//! ///
+//! ///  OPTIONS:
+//! ///     -a, --address <address>             Defines the ip's address.
+//! ///     -c, --ca-cert <cert>                Defines the cert.pem's certificat.
+//! ///     -k, --ca-key <key>                  Defines the key.pem's certificat.
+//! ///     -l, --source-locale <locale>        Defines the locale's directory.
+//! ///     -p, --protocol <protocol>           Defines the protocol. [values: http, https]
+//! ///     -s, --socket <socket>               Defines the port.
+//! ///     -t, --source-template <template>    Defines the template's directory.
+//! ///
+//! /// SUBCOMMANDS:
+//! ///     help    Prints this message
+//! ///     test    controls testing features
 //! ```
 
 extern crate sass_rs;

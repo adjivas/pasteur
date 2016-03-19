@@ -5,6 +5,52 @@
 // This file may not be copied, modified, or distributed
 // except according to those terms.
 
+//! # Pasteur
+//!
+//! [![travis-badge][]][travis] [![coverage-badge][]][coverage] [![clippy-badge][]][clippy] [![docs-badge][]][docs] [![license-badge][]][license] [![gitter-badge][]][gitter]
+//!
+//! [license-badge]: https://img.shields.io/crates/l/cublas.svg?style=flat-square
+//! [license]: https://github.com/adjivas/pasteur/blob/master/README.md#license
+//! [docs-badge]: https://img.shields.io/badge/API-docs-blue.svg?style=flat-square
+//! [docs]: http://adjivas.github.io/pasteur/pasteur
+//! [gitter-badge]: https://badges.gitter.im/adjivas/pasteur.svg?style=flat-square
+//! [gitter]: https://gitter.im/adjivas/pasteur?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+//! [travis-badge]: https://travis-ci.org/adjivas/pasteur.svg?branch=master&style=flat-square
+//! [travis]: https://travis-ci.org/adjivas/pasteur
+//! [coverage-badge]: https://coveralls.io/repos/github/adjivas/pasteur/badge.svg?branch=master&style=flat-square
+//! [coverage]: https://coveralls.io/github/adjivas/pasteur?branch=master
+//! [clippy-badge]: https://clippy.bashy.io/github/adjivas/pasteur/master/badge.svg?style=flat-square
+//! [clippy]: https://clippy.bashy.io/github/adjivas/pasteur/master/log
+//!
+//! #### CLI:
+//! See command **help**:
+//!
+//! ```
+//! Pasteur
+//! adjivas <adjivas@users.noreply.github.com>
+//! A WebSite who synthesize all the knowledge about the autism
+//!
+//! USAGE:
+//! 	pasteur [FLAGS] [OPTIONS] [SUBCOMMAND]
+//!
+//! FLAGS:
+//!     -h, --help       Prints help information
+//!      -V, --version    Prints version information
+//!
+//!  OPTIONS:
+//!     -a, --address <address>             Defines the ip's address.
+//!     -c, --ca-cert <cert>                Defines the cert.pem's certificat.
+//!     -k, --ca-key <key>                  Defines the key.pem's certificat.
+//!     -l, --source-locale <locale>        Defines the locale's directory.
+//!     -p, --protocol <protocol>           Defines the protocol. [values: http, https]
+//!     -s, --socket <socket>               Defines the port.
+//!     -t, --source-template <template>    Defines the template's directory.
+//!
+//! SUBCOMMANDS:
+//!     help    Prints this message
+//!     test    controls testing features
+//! ```
+
 extern crate handlebars_iron;
 extern crate router;
 extern crate iron;

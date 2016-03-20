@@ -24,7 +24,8 @@ pub fn head (
             data.insert("style".to_string(), sheet.clone());
         }
     }
+
     resp.set_mut(handlebars_iron::Template::new("head", data))
-        ;
+        .set_mut(iron::status::Ok);
     Ok(resp)
 }

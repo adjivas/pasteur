@@ -1,0 +1,70 @@
+$menu-background: rgba(250, 250, 250, 1);
+$menu-separator: rgba(170, 170, 170, 1);
+$max: 100%;
+$menu-width: 20;
+$tooltip-height: 50;
+$tooltip-demi-height: $tooltip-height/2;
+
+body {
+  position: absolute;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  margin: inherit;
+  height: $max;
+  width: $max;
+  header, aside {
+    position: relative;
+    margin: inherit;
+    display: inherit;
+    flex-direction: column;
+    align-items: inherit;
+    justify-content: flex-start;
+    height: inherit;
+  }
+  header {
+    width: #{$menu-width}vw;
+    background-color: $menu-background;
+    figure, img {
+      position: inherit;
+      margin: inherit;
+      width: #{$menu-width}vw;
+      height: #{$menu-width}vw;
+    }
+    figure {
+      border-bottom: 2px solid $menu-separator;
+      figcaption {
+        position: fixed;
+        color: white;
+        text-align: center;
+        padding: inherit;
+        left: #{$menu-width}vw;
+        top: calc(#{$menu-width}vw / 4);
+        background-color: black;
+        height: #{$tooltip-height}px;
+        line-height: #{$tooltip-height}px;
+      }
+      figcaption::before {
+        position: fixed;
+        content: '\00A0';
+        border-top: #{$tooltip-demi-height}px solid transparent;
+        border-right: calc(#{$menu-width}vw / 2) solid black;
+        border-bottom: #{$tooltip-demi-height}px solid transparent;
+        left: calc(#{$menu-width}vw / 2);
+        height: 0px;
+        width: 0px;
+      }
+    }
+    nav li a {
+      text-decoration: none;
+    }
+  }
+  aside {
+    width: calc(#{$max} - #{$menu-width}%);
+    article {
+      margin-left: 10%;
+      margin-right: 10%;
+    }
+  }
+}

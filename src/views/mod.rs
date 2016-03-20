@@ -8,6 +8,8 @@
 //! The `views` module contents all the public pages.
 
 mod index;
+mod head;
 pub mod generic;
 
 pub use self::index::index;
+pub use self::head::head;

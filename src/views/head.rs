@@ -8,30 +8,23 @@
 extern crate std;
 
 use middlewares;
-use views;
 
 use handlebars_iron;
 use iron;
 use iron::modifier::Set;
 
-pub fn prologue (
+pub fn head (
     req: &mut iron::request::Request,
 ) -> iron::IronResult<iron::response::Response> {
-    let mut resp: iron::response::Response = try!(views::head(req));
+    let mut resp: iron::response::Response = iron::response::Response::new();
     let mut data: std::collections::HashMap<String, String> = std::collections::HashMap::new();
 
-    if let Some(shared_lang) = req.extensions.get::<middlewares::ShareLang>() {
-        if let Some(lang) = shared_lang.get_table() {
-            data.extend(lang);
-        }
-    }
     if let Some(shared_style) = req.extensions.get::<middlewares::ShareStyle>() {
         if let Some(sheet) = shared_style.get_sheet(&"book".to_string()) {
             data.insert("style".to_string(), sheet.clone());
         }
     }
-
-    resp.set_mut(handlebars_iron::Template::new("prologue", data))
-        .set_mut(iron::status::Ok);
+    resp.set_mut(handlebars_iron::Template::new("head", data))
+        ;
     Ok(resp)
 }

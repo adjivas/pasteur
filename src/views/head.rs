@@ -11,21 +11,18 @@ use middlewares;
 
 use handlebars_iron;
 use iron;
-use iron::modifier::Set;
 
-pub fn head (
-    req: &mut iron::request::Request,
-) -> iron::IronResult<iron::response::Response> {
-    let mut resp: iron::response::Response = iron::response::Response::new();
+pub fn get (
+    req: &iron::request::Request,
+) -> Option<handlebars_iron::Template> {
     let mut data: std::collections::HashMap<String, String> = std::collections::HashMap::new();
+    let mut result: Option<handlebars_iron::Template> = None;
 
     if let Some(shared_style) = req.extensions.get::<middlewares::ShareStyle>() {
         if let Some(sheet) = shared_style.get_sheet(&"book".to_string()) {
             data.insert("style".to_string(), sheet.clone());
+            result = Some(handlebars_iron::Template::new("head", data));
         }
     }
-
-    resp.set_mut(handlebars_iron::Template::new("head", data))
-        .set_mut(iron::status::Ok);
-    Ok(resp)
+    result
 }

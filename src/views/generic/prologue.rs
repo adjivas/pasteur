@@ -14,24 +14,41 @@ use handlebars_iron;
 use iron;
 use iron::modifier::Set;
 
+pub fn get (
+    req: &iron::request::Request,
+) -> Option<handlebars_iron::Template> {
+    let mut data: std::collections::HashMap<String, String> = std::collections::HashMap::new();
+    let mut result: Option<handlebars_iron::Template> = None;
+
+    if let (Some(shared_lang), Some(shared_style)) = (
+        req.extensions.get::<middlewares::ShareLang>(),
+        req.extensions.get::<middlewares::ShareStyle>()
+    ) {
+        if let (Some(lang), Some(sheet)) = (
+            shared_lang.get_table(),
+            shared_style.get_sheet(&"book".to_string())
+        ) {
+            data.extend(lang);
+            data.insert("style".to_string(), sheet.clone());
+            result = Some(handlebars_iron::Template::new("prologue", data));
+        }
+    }
+    result
+}
+
+#[allow(dead_code, unused_variables)]
 pub fn prologue (
     req: &mut iron::request::Request,
 ) -> iron::IronResult<iron::response::Response> {
-    let mut resp: iron::response::Response = try!(views::head(req));
-    let mut data: std::collections::HashMap<String, String> = std::collections::HashMap::new();
+    let mut resp: iron::response::Response = iron::response::Response::new();
 
-    if let Some(shared_lang) = req.extensions.get::<middlewares::ShareLang>() {
-        if let Some(lang) = shared_lang.get_table() {
-            data.extend(lang);
-        }
-    }
-    if let Some(shared_style) = req.extensions.get::<middlewares::ShareStyle>() {
-        if let Some(sheet) = shared_style.get_sheet(&"book".to_string()) {
-            data.insert("style".to_string(), sheet.clone());
-        }
-    }
 
-    resp.set_mut(handlebars_iron::Template::new("prologue", data))
-        .set_mut(iron::status::Ok);
+    if let (Some(template_head), Some(template)) = (
+        views::head::get(req),
+        self::get(req)
+    ) {
+        resp.set_mut(template)
+            .set_mut(iron::status::Ok);
+    }
     Ok(resp)
 }

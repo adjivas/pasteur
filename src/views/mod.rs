@@ -12,4 +12,3 @@ mod head;
 pub mod generic;
 
 pub use self::index::index;
-pub use self::head::head;

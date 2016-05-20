@@ -1,0 +1,1 @@
+initSidebarItems({"fn":[["new","The `new` function instancies the server."]],"mod":[["middlewares","The `middlewares` module contents all the public pages"],["protocol","The `protocol` module defines the list protocol supported by the server."],["views","The `views` module contents all the public pages."]]});

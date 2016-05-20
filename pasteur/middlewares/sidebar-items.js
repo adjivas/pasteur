@@ -1,0 +1,1 @@
+initSidebarItems({"mod":[["lang",""],["style",""]],"struct":[["DesctiptionLang","The `DesctiptionLang` structure defines an interface to get sentence internationalized."],["ShareLang","The `ShareLang` structure defines and shares the lang by Arc."],["ShareStyle","The `ShareStyle` structure defines and shares the style by Arc."]]});

@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["DesctiptionLang","The `DesctiptionLang` structure defines an interface to get sentence internationalized."],["Lang",""],["ShareLang","The `ShareLang` structure defines and shares the lang by Arc."]],"type":[["Directionary","The `Lang` structure defines the international table of translation."],["Environement",""]]});

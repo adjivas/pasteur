@@ -1,0 +1,1 @@
+initSidebarItems({"struct":[["DesctiptionStyle","The `DesctiptionStyle` structure defines an interface to get sentence internationalized."],["ShareStyle","The `ShareStyle` structure defines and shares the style by Arc."],["Style","The `Style` structure defines the international table of translation."]]});
